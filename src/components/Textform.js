@@ -6,13 +6,20 @@ export default function Textform(props) {
     setText(event.target.value);
   }
 
-  const handleUpClick = (textcase) => {
-    setText(text.toUpperCase());
+  const handleOnClick = (event) => {
+    if (event.target.dataset.id === "uppercase"){
+      setText(text.toUpperCase());
+    }
+    else if (event.target.dataset.id === "lowercase")  {
+      setText(text.toLowerCase());
+    }
+
+    else if (event.target.dataset.id === "textclear")  {
+      setText("");
+    }
+      
   }
 
-  const handleLwClick = (textcase) => {
-    setText(text.toLowerCase());
-  }
   const [text, setText] = useState("");
   return (
     <>
@@ -21,8 +28,9 @@ export default function Textform(props) {
         <div className="mb-3">
           <textarea className="form-control" value={text} id="mybox" onChange={handleOnChange} rows="8"></textarea>
         </div>
-        <button className="btn btn-primary mx-2" onClick={handleUpClick}>Convert to Uppercase</button>
-        <button className="btn btn-primary mx-2" onClick={handleLwClick}>Convert to Lowercase</button>
+        <button className="btn btn-primary mx-2" data-id="uppercase" onClick={handleOnClick}>Convert to Uppercase</button>
+        <button className="btn btn-primary mx-2" data-id="lowercase" onClick={handleOnClick}>Convert to Lowercase</button>
+        <button className="btn btn-primary mx-2" data-id="textclear" onClick={handleOnClick}>Clear text</button>
       </div>
       <div className="container my-3">
         <h3>Your text summery</h3>
